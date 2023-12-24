@@ -1,0 +1,21 @@
+### SpringSecurityConfig
+- `http.httpBasic().disable()`
+  - `// basic authentication filter 비활성화` 부분이 존재한다.
+  - Basic Authentication Filter 비활성화
+  - 존재 이유: httpBasic 방식 대신 Jwt를 사용하기 때문에 disable로 설정하는 작업이 필요하다.
+  - `BasicAuthenticationFilter`의 특징
+    - http에서는 header에 username:password 값이 base64로 인코딩(decode 하기가 쉽다.)되어  전달 되기 떄문에 보안에 매우 취약하다. => 반드시 https 프로토콜에서 사용할 것을 권장한다.
+    - 최초 로그인시에만 인증을 처리하고, 이후에는 session에 의존한다.
+      - 세션이 만료된 이후라도 브라우저 기반의 앱에서는 장시간 서비스를 로그인 페이지를 거치지 않고 이용할 수 있다.
+    - 에러가 나면 401(UnAuthorized) 에러를 내려보낸다.
+- `csrf()`
+  - CSRF란?
+    - Cross site Request forgery
+    - 사이즈간 위조 요청으로, 정상적인 사용자가 의도치 않은 위조요청을 보내는 것을 의미한다.
+  - `csrf()`의 기능
+    - protection을 활성화하는 것이 default
+      - protection을 통해 GET 요청을 제외한 상태를 변화시킬 수 있는 POST, PUT, DELETE 요청으로부터 상태를 변경할 수 없도록 보호한다.
+      - 즉, read-only만 가능하게 한다.
+- `rememberMe()`
+  - JSESSIONID이 만료되거나 쿠키가 없을 지라도 어플리케이션이 사용자를 기억하는 기능이다. 자동 로그인 기능을 떠올리면 쉽다. 
+  - Remember-Me 토큰 쿠키를 이용한다. 서버는 이 토큰의 유효성을 검사하고, 검증되면 사용자는 로그인된다.
