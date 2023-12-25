@@ -1,6 +1,6 @@
 ## MODE_THREADLOCAL
 - `ThreadLocalSecurityContextHolderStrategy`를 사용합니다.
-- `ThreadLocal`을 사용하여 같은 Thread 안에서 1SecurityContext`를 공유합니다.
+- `ThreadLocal`을 사용하여 같은 Thread 안에서 `SecurityContext`를 공유합니다.
 - **기본 설정 모드**입니다.
 ```java
 final class ThreadLocalSecurityContextHolderStrategy implements SecurityContextHolderStrategy {
