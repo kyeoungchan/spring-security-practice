@@ -15,7 +15,7 @@
 - `SecurityContextHolder`
   - `SecurityContext`를 제공하는 static 메소드(`getContext`)를 지원합니다.
 - `SecurityContext`
-  - `SecurityContext`는 접근 주체와 인증에 대한 정보를 담고 있는 `Context` `입니다.
+  - `SecurityContext`는 접근 주체와 인증에 대한 정보를 담고 있는 `Context` 입니다.
   - 즉, `Authentication`을 담고 있습니다.
 - `Authentication`
   - `Principal`과 `GrantAuthority`를 제공합니다.
