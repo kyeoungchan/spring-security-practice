@@ -60,6 +60,7 @@ final class FilterOrderRegistration {
   - `http.httpBasic()`
 - 위 실험 결과 `BasicAuthentication`이 비활성화됐을 때는 개인노트 페이지 요청이 안 되고 로그인 페이지로 리다이렉트되지만, 활성화됐을 때는 요청한 페이지가 나온다.
   - 이처럼 로그인 데이터를 Base64로 인코딩해서 모든 요청에 포함해서 보내면 `BasicAuthenticationFilter`는 인증을 한다.
+    - Base64란: Base64 is a group of similar binary-to-text encoding schemes that **represent binary data in an ASCII string format** by translating it into a radix-64 representation.
   - 세션이 필요없고 요청이 올 때마다 인증이 이루어진다.(stateless)
   - 보안에 취약하다.
   - 따라서 `BasicAuthenticationFilter`를 사용할 때는 반드시 https를 사용하도록 권장한다.
@@ -78,11 +79,11 @@ final class FilterOrderRegistration {
 **`DaoAuthenticationProvider(AbstractUserDetailsAuthenticationProvider)`**
 - 유저정보를 가져오는 `Provider`
 - `AbstractUserDetailsAuthenticationProvider`를 `DaoAuthenticationProvider`가 구현한다.
-- 사실상 우리가 구현한 UserDetailService를 불러오는게 거의 전부다.
+- 사실상 우리가 구현한 `UserDetailService`를 불러오는게 거의 전부다.
 
-### CsrfFilter
+### `CsrfFilter`
 - Csrf Attack을 방어하는 Filter
-- [csrf 관련 간단하게 기록한 링크](https://github.com/kyeoungchan/spring-security-practice/tree/main/src/main/java/me/benny/practice/spring/security/config
+- [csrf 관련 간단하게 기록한 링크](https://github.com/kyeoungchan/spring-security-practice/tree/main/src/main/java/me/benny/practice/spring/security/config)
 - CsrfFilter는 Csrf Token을 사용하여 위조된 페이지의 악의적인 공격을 방어한다.
   - Thymeleaf는 페이지를 만들 때 자동으로 Csrf Token을 hidden으로 넣어준다.
     - `<input type="hidden" name="_csrf" value="594af42a-63e9-4ef9-aeb2-3687f12cdf43"/>`
@@ -94,12 +95,12 @@ final class FilterOrderRegistration {
 - `Session`의 세션 만료 시간은 기본 설정이 30분이지만 `RememberMeAuthenticationFilter`의 기본 설정은 2주
 - `http.rememberMe();`를 통해 `RememberMeAuthenticationFilter` On
 - thymeleaf 코드
-```html
-<div>
-  <span>로그인 유지하기</span>
-  <input type="checkbox" id="remember-me" name="remember-me" class="form-check-input mt-0" autocomplete="off">
-</div>
-```
+  ```html
+  <div>
+    <span>로그인 유지하기</span>
+    <input type="checkbox" id="remember-me" name="remember-me" class="form-check-input mt-0" autocomplete="off">
+  </div>
+  ```
 
 ### `AnonymousAuthenticationFilter`
 - 인증이 안된 유저가 요청을 하면 Anonymous(익명) 유저로 만들어 `Authentication`에 넣어주는 필터
